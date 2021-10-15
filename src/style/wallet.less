@@ -1,0 +1,83 @@
+/** @format */
+
+.wallet-item {
+  width: 100%;
+  height: 48px;
+  padding: 0px 20px;
+  display: flex;
+  align-items: center;
+  border-radius: '0px';
+  background: @input-back;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 24px;
+  &:first-child {
+    margin-top: 11px;
+  }
+  &:hover {
+    background: #e9e9e9;
+  }
+  &.active {
+    border: 2px solid #000000;
+  }
+}
+
+.connect-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  button {
+    width: 168px;
+    height: 48px;
+    font-size: 16px;
+  }
+}
+
+.wallet-account-box {
+  .platform,
+  .account {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    p {
+      color: #828282;
+      font-size: 14px;
+    }
+    button {
+      width: 92px;
+      height: 32px;
+    }
+  }
+  .account {
+    margin-top: 34px;
+  }
+  .platform {
+    margin-top: 11px;
+  }
+}
+
+.account-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  button,
+  a {
+    display: block;
+    width: 168px;
+    height: 48px;
+    text-align: center;
+    cursor: pointer;
+    margin: 0px 24px;
+    font-size: 16px;
+  }
+  button {
+    span {
+      font-size: 16px;
+    }
+  }
+  a {
+    color: #fff;
+    background: #000;
+    line-height: 48px;
+  }
+}

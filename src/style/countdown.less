@@ -1,0 +1,119 @@
+/** @format */
+
+.countdown-block {
+  display: flex;
+  align-items: center;
+  .tiem-block,
+  .gap {
+    p {
+      font-size: 30px;
+      color: #c6c6c6;
+      text-align: center;
+      height: 38px;
+      padding-top: 4px;
+      width: 100%;
+    }
+  }
+  .tiem-block {
+    .num {
+      position: relative;
+      div {
+        display: flex;
+        flex-direction: column;
+        // justify-content: space-between;
+        width: 100px;
+        &:nth-of-type(1) {
+          height: 60px;
+          background: @primary-color;
+        }
+        &:nth-of-type(2) {
+          height: 60px;
+          background: @primary-color;
+          margin-top: 3px;
+        }
+      }
+      span {
+        font-size: 68px;
+        color: #fff;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+  .gap {
+    flex: 1;
+    font-size: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    div {
+      width: 100%;
+      height: 123px;
+      position: relative;
+      &::after,
+      &::before {
+        content: '';
+        width: 8px;
+        height: 8px;
+        border-radius: 100%;
+        background: @primary-color;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 0%);
+      }
+      &::after {
+        top: 47px;
+      }
+      &::before {
+        bottom: 47px;
+      }
+    }
+  }
+
+  &.small {
+    .tiem-block,
+    .gap {
+      p {
+        font-size: 14px;
+        height: 20px;
+        padding-top: 4px;
+      }
+    }
+    .tiem-block {
+      .num {
+        div {
+          width: 50px;
+          &:nth-of-type(1) {
+            height: 30px;
+          }
+          &:nth-of-type(2) {
+            height: 30px;
+            margin-top: 2px;
+          }
+        }
+        span {
+          font-size: 36px;
+        }
+      }
+    }
+    .gap {
+      div {
+        height: 62px;
+        &::after,
+        &::before {
+          width: 4px;
+          height: 4px;
+        }
+        &::after {
+          top: 24px;
+        }
+        &::before {
+          bottom: 24px;
+        }
+      }
+    }
+  }
+}
