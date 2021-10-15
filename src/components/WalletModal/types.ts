@@ -9,5 +9,6 @@ export type Login = (connectorId: ConnectorNames) => void
 
 export interface Config {
   title: string
-  connectorId: ConnectorNames
+  connectorId: ConnectorNames,
+  icon: any
 }

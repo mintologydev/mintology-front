@@ -12,51 +12,126 @@
 export const setupNetwork = async () => {
   const provider = window.ethereum
   if (provider) {
-    // const chainId = parseInt('1', 10)
-    const chainId = parseInt('4', 10)
+    const chainId = parseInt('1', 10)
+    // const chainId = parseInt('97', 10)
+    // const chainId = parseInt('4', 10)
+
+    // try {
+    //   await provider.request({
+    //     method: 'wallet_addEthereumChain',
+    //     params: [
+    //       {
+    //         chainId: `0x${chainId.toString(16)}`,
+    //         chainName: 'Ethereum Mainnet',
+    //         nativeCurrency: {
+    //           name: 'ETH',
+    //           symbol: 'eth',
+    //           decimals: 18,
+    //         },
+    //         rpcUrls: ['https://mainnet.infura.io/v3/e076c591970f48869749c708c5b939e5'],
+    //         blockExplorerUrls: ['https://etherscan.io'],
+    //       },
+    //       // {
+    //       //   chainId: `0x${chainId.toString(16)}`,
+    //       //   chainName: 'Rinkeby Test Network',
+    //       //   nativeCurrency: {
+    //       //     name: 'ETH',
+    //       //     symbol: 'eth',
+    //       //     decimals: 18,
+    //       //   },
+    //       //   rpcUrls: ['https://rinkeby.infura.io/v3/e076c591970f48869749c708c5b939e5'],
+    //       //   // rpcUrls: ['https://rinkeby.infura.io'],
+    //       //   blockExplorerUrls: ['https://rinkeby.etherscan.io'],
+    //       // },
+    //       // {
+    //       //   chainId: `0x${chainId.toString(16)}`,
+    //       //   chainName: 'BSC Test Network',
+    //       //   nativeCurrency: {
+    //       //     name: 'ETH',
+    //       //     symbol: 'eth',
+    //       //     decimals: 18,
+    //       //   },
+    //       //   rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545'],
+    //       //   blockExplorerUrls: ['https://testnet.bscscan.com'],
+    //       // },
+    //     ],
+    //   })
+    //   return true
+    // } catch (error) {
+    //   try {
+    //     await provider.request({
+    //       method: 'wallet_switchEthereumChain',
+    //       params: [
+    //         {
+    //           chainId: '0x1',
+    //         },
+    //       ],
+    //     })
+    //     return true
+    //   } catch (error2) {
+    //     console.error('2222Failed to setup the network in Metamask:', error2)
+    //     return false
+    //   }
+
+    //   // return false
+    // }
+
     try {
       await provider.request({
-        method: 'wallet_addEthereumChain',
+        method: 'wallet_switchEthereumChain',
         params: [
-          // {
-          //   chainId: `0x${chainId.toString(16)}`,
-          //   chainName: 'Ethereum Mainnet',
-          //   nativeCurrency: {
-          //     name: 'ETH',
-          //     symbol: 'eth',
-          //     decimals: 18,
-          //   },
-          //   rpcUrls: ['https://mainnet.infura.io'],
-          //   blockExplorerUrls: ['https://etherscan.io'],
-          // },
-          // {
-          //   chainId: `0x${chainId.toString(16)}`,
-          //   chainName: 'Rinkeby Test Network',
-          //   nativeCurrency: {
-          //     name: 'ETH',
-          //     symbol: 'eth',
-          //     decimals: 18,
-          //   },
-          //   rpcUrls: ['https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'],
-          //   blockExplorerUrls: ['https://rinkeby.etherscan.io'],
-          // },
           {
-            chainId: `0x${chainId.toString(16)}`,
-            chainName: 'BSC Test Network',
-            nativeCurrency: {
-              name: 'ETH',
-              symbol: 'eth',
-              decimals: 18,
-            },
-            rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545'],
-            blockExplorerUrls: ['https://testnet.bscscan.com'],
+            chainId: '0x1',
           },
         ],
       })
       return true
     } catch (error) {
-      console.error('Failed to setup the network in Metamask:', error)
-      return false
+      try {
+        await provider.request({
+          method: 'wallet_addEthereumChain',
+          params: [
+            {
+              chainId: `0x${chainId.toString(16)}`,
+              chainName: 'Ethereum Mainnet',
+              nativeCurrency: {
+                name: 'ETH',
+                symbol: 'eth',
+                decimals: 18,
+              },
+              rpcUrls: ['https://mainnet.infura.io/v3/e076c591970f48869749c708c5b939e5'],
+              blockExplorerUrls: ['https://etherscan.io'],
+            },
+            // {
+            //   chainId: `0x${chainId.toString(16)}`,
+            //   chainName: 'Rinkeby Test Network',
+            //   nativeCurrency: {
+            //     name: 'ETH',
+            //     symbol: 'eth',
+            //     decimals: 18,
+            //   },
+            //   rpcUrls: ['https://rinkeby.infura.io/v3/e076c591970f48869749c708c5b939e5'],
+            //   // rpcUrls: ['https://rinkeby.infura.io'],
+            //   blockExplorerUrls: ['https://rinkeby.etherscan.io'],
+            // },
+            // {
+            //   chainId: `0x${chainId.toString(16)}`,
+            //   chainName: 'BSC Test Network',
+            //   nativeCurrency: {
+            //     name: 'ETH',
+            //     symbol: 'eth',
+            //     decimals: 18,
+            //   },
+            //   rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545'],
+            //   blockExplorerUrls: ['https://testnet.bscscan.com'],
+            // },
+          ],
+        })
+        return true
+      } catch (error2) {
+        console.error('2222Failed to setup the network in Metamask:', error2)
+        return false
+      }
     }
   } else {
     console.error("Can't setup the BSC network on metamask because window.ethereum is undefined")

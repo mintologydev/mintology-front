@@ -16,7 +16,7 @@ interface Props {
 }
 
 const WalletCard: React.FC<Props> = ({login, walletConfig, onDismiss}) => {
-  const {title} = walletConfig
+  const {title, icon} = walletConfig
   return (
     <div
       className="wallet-item"
@@ -26,6 +26,7 @@ const WalletCard: React.FC<Props> = ({login, walletConfig, onDismiss}) => {
         onDismiss()
       }}
       id={`wallet-connect-${title.toLocaleLowerCase()}`}>
+      <img src={icon} />
       <Text style={{color: '#000'}}>{title}</Text>
     </div>
   )

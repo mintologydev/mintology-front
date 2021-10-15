@@ -7,6 +7,7 @@ import config from './config'
 import {Login} from './types'
 import 'style/wallet.less'
 
+
 const defaultOnDismiss = () => null
 
 type ConnectModalProps = {
@@ -15,7 +16,6 @@ type ConnectModalProps = {
 }
 
 const ConnectModal = ({login, onDismiss = defaultOnDismiss}: ConnectModalProps) => {
-  console.log('没进来么####')
   return (
     <Modal
       title="Connect to a wallet"
@@ -23,6 +23,11 @@ const ConnectModal = ({login, onDismiss = defaultOnDismiss}: ConnectModalProps) 
       onOk={onDismiss}
       onCancel={onDismiss}
       width="432px"
+      closeIcon={
+        <svg className="modal-close-icon" aria-hidden="true">
+          <use xlinkHref="#icon-icon_close"></use>
+        </svg>
+      }
       footer={
         <div className="connect-footer">
           <Button onClick={onDismiss}>Close</Button>

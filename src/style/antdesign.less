@@ -5,15 +5,37 @@
   border: none;
 }
 .ant-btn[disabled] {
-  background: @btn-default-borde;
+  background: #E9E9E9;
   border-radius: 0px;
+  border: none;
+  color: #C7C7C7;
+  cursor: not-allowed;
+  &:hover {
+    background: #E9E9E9;
+    color: #C7C7C7;
+  }
 }
 
 .ant-modal-header {
   padding: 16px 0px;
   margin: 0px 24px;
+  border-bottom: 1px solid #000;
 }
 
 .ant-modal-footer {
-  padding: 24px 16px;
+  padding: 24px;
+  padding-top: 4px;
+}
+
+.modal-one-btn {
+  width: 100%;
+  height: 48px;
+  font-size: 16px;
+}
+
+.ant-modal-close-x {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 24px;
 }

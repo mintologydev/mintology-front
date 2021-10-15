@@ -109,7 +109,24 @@ a {
   margin: 0 auto;
   padding-top: 30px;
 }
+body {
+  min-width: 1000px;
+  overflow: auto;
+}
+
+.modal-close-icon {
+  width: 24px;
+  height: 24px;
+  fill: #000;
+  cursor: pointer;
+  &:hover {
+    fill: rgba(0, 0, 0, 0.8);
+  }
+}
 @media (max-width: 750px) {
+  body {
+    min-width: 100%;
+  }
   .container-center {
     width: 100%;
     padding: 0px 10px 0;

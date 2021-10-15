@@ -21,24 +21,22 @@ const useAuth = () => {
   // const { toastError } = useToast()
   const login = useCallback(
     (connectorID: ConnectorNames) => {
-      console.log('connectorID####', connectorID)
       window.localStorage.setItem('currentPlatform', connectorID)
+      // console.log('connectorID####', connectorID)
       const connector = connectorsByName[connectorID]
-
-      console.log('connector#####', connector)
+      // console.log('connectorconnectorconnector####', connector)
       if (connector) {
         activate(connector, async (error: Error) => {
           if (error instanceof UnsupportedChainIdError) {
-            console.log('111111')
+            // console.log('没进来么')
             const hasSetup = await setupNetwork()
+            // console.log('hasSetup####', hasSetup)
             if (hasSetup) {
-              console.log('22222')
               activate(connector)
             }
           } else {
             window.localStorage.removeItem(connectorLocalStorageKey)
             if (error instanceof NoEthereumProviderError) {
-              console.log('333333')
               notification({
                 type: 'error',
                 message: 'Provider Error',
@@ -49,7 +47,6 @@ const useAuth = () => {
               error instanceof UserRejectedRequestErrorWalletConnect
             ) {
               if (connector instanceof WalletConnectConnector) {
-                console.log('333333')
                 const walletConnector = connector as WalletConnectConnector
                 walletConnector.walletConnectProvider = null
               }
@@ -59,7 +56,6 @@ const useAuth = () => {
                 description: 'Please authorize to access your account',
               })
             } else {
-              console.log('333333')
               notification({
                 type: 'error',
                 message: error.name,
@@ -69,7 +65,6 @@ const useAuth = () => {
           }
         })
       } else {
-        console.log('333333')
         notification({
           type: 'error',
           message: 'Unable to find connector',

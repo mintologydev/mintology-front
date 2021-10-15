@@ -7,7 +7,10 @@
   > .left {
     width: 520px;
     height: 590px;
-    background: pink;
+    overflow: hidden;
+    img {
+      width: 100%;
+    }
   }
   .right {
     width: 620px;
@@ -17,11 +20,12 @@
       font-size: 42px;
       line-height: 50px;
     }
-    .start-countdown-box {
+    .start-countdown-box,.coming-soon {
       margin-top: 16px;
       width: 620px;
       height: 422px;
-      background: linear-gradient(180deg, rgba(162, 255, 244, 0.14) 0%, rgba(235, 56, 210, 0) 100%);
+      // background: linear-gradient(180deg, rgba(162, 255, 244, 0.14) 0%, rgba(235, 56, 210, 0) 100%);
+      background: linear-gradient(180deg, #EDDEFB 0%, rgba(237, 222, 251, 0) 100%);
       padding: 0px 56px;
       padding-top: 50px;
       > .title {
@@ -32,6 +36,14 @@
         span {
           font-size: 26px;
         }
+        >div {
+          display: flex;
+          align-items: center;
+          img {
+            height: 23px;
+            margin-right: 8px;
+          }
+        }
       }
       button {
         width: 100%;
@@ -41,6 +53,167 @@
           font-size: 36px;
         }
       }
+    }
+    .coming-soon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 50px!important;
+      img {
+        width: 120px;
+        height: 120px;
+      }
+      p {
+        font-size: 26px;
+        margin-top: 8px;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 1600px) {
+  .active-block {
+    width: 952px;
+    // min-width: 1000px;
+    .left {
+      width: 408px;
+      height: 463px;
+    }
+    .right {
+      width: 514px;
+      margin-left: 30px;
+      >h3 {
+        height: 100px;
+        font-size: 36px;
+      }
+      .start-countdown-box, .coming-soon {
+        width: 514px;
+        height: 350px;
+        padding: 0px 39px;
+        padding-top: 24px;
+        .countdown-block {
+          .time-block {
+            .num {
+              div {
+                width: 89px;
+                height: 53px;
+              }
+              span {
+                font-size: 52px;
+              }
+            }
+            p {
+              font-size: 24px;
+              padding-top: 10px;
+            }
+          }
+          .gap {
+            div {
+              height: 109px;
+              &::after {
+                top: 44px;
+              }
+              &::before {
+                bottom: 44px;
+              }
+            }
+            p {
+              font-size: 24px;
+              padding-top: 6px;
+            }
+          }
+        }
+        >.title {
+          padding-bottom: 13px;
+          span {
+            font-size: 24px;
+          }
+        }
+        button {
+          height: 64px;
+          margin-top: 40px;
+          span {
+            font-size: 24px;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+
+@media (max-width: 750px) {
+  .active-block {
+    width: 100%;
+    flex-direction: column;
+    margin-top: 40px;
+    >.left {
+      width: 100%;
+      height: auto;
+    }
+    .right {
+      width: 100%;
+      margin-left: 0px;
+      >h3 {
+        height: auto;
+        font-size: 24px;
+        line-height: 1.5;
+        margin-top: 14px;
+      }
+      .start-countdown-box,.coming-soon {
+        width: 100%;
+        padding: 0px 10px;
+        padding-top: 14px;
+        >.title {
+          span {
+            font-size: 16px;
+          }
+        }
+
+        .countdown-block {
+          .time-block {
+            .num {
+              div {
+                width: 68px;
+                height: 41px;
+              }
+              span {
+                font-size: 40px;
+              }
+            }
+            p {
+              font-size: 18px;
+              padding-top: 8px;
+            }
+          }
+          .gap {
+            div {
+              height: 82px;
+              &::after {
+                top: 44px;
+              }
+              &::before {
+                bottom: 44px;
+              }
+              &::after,
+              &::before {
+                width: 5px;
+                height: 5px;
+              }
+            }
+            p {
+              font-size: 24px;
+              padding-top: 6px;
+            }
+          }
+        }
+        button {
+          margin-top: 24px;
+        }
+      }
+
     }
   }
 }

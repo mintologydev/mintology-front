@@ -24,13 +24,20 @@ const AccountModal: React.FC<Props> = ({account, logout, onDismiss = () => null}
   const currentPlatformKey: any = localStorage.getItem('currentPlatform') || 'injected'
   const currentPlatform = ConnectorNames[currentPlatformKey]
 
+  const accountEllipsis = account ? `${account.substring(0, 8)}...${account.substring(account.length - 8)}` : null
+
   return (
     <Modal
       title="Account"
       visible={true}
       onOk={onDismiss}
       onCancel={onDismiss}
-      style={{width: '432px'}}
+      width="432px"
+      closeIcon={
+        <svg className="modal-close-icon" aria-hidden="true">
+          <use xlinkHref="#icon-icon_close"></use>
+        </svg>
+      }
       footer={
         <div className="account-footer">
           <Button
@@ -85,7 +92,7 @@ const AccountModal: React.FC<Props> = ({account, logout, onDismiss = () => null}
           <Button>Change</Button>
         </div>
         <div className="account">
-          <p>{account}</p>
+          <p>{accountEllipsis}</p>
           <CopyToClipboard toCopy={account}>
             <Button>copy</Button>
           </CopyToClipboard>

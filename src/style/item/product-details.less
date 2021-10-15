@@ -6,6 +6,9 @@
     width: 100%;
     // border: 1px solid #C6C6C6;
     background: #f8f8f8;
+    &.h5 {
+      display: none;
+    }
     td {
       height: 60px;
       padding: 0px 60px;
@@ -14,12 +17,43 @@
         display: flex;
         justify-content: space-between;
         > span {
-          font-size: 16px;
+          font-size: 14px;
           color: #828282;
         }
         > div {
-          font-size: 16px;
+          font-size: 14px;
           color: #000;
+        }
+        svg {
+          width: 20px;
+          height: 20px;
+          fill: #7288DA;
+        }
+        .official-website {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          span {
+            color: #027AFF;
+          }
+          svg {
+            fill: #027AFF;
+            width: 13px;
+            height: 13px;
+            margin-left: 4px;
+          }
+        }
+        .media-list {
+          display: flex;
+          align-items: center;
+          a {
+            font-size: 0px;
+            svg,img {
+              width: 20px;
+              height: 20px;
+              margin-left: 10px;
+            }
+          }
         }
       }
     }
@@ -35,5 +69,92 @@
     color: #000;
     background: #f8f8f8;
     margin-top: 20px;
+  }
+
+  .desc-box {
+    padding-top: 40px;
+    >.title {
+      font-size: 24px;
+      color: #000;
+    }
+    .info-block {
+      margin-top: 30px;
+      padding-left: 35px;
+      >h3 {
+        font-size: 14px;
+        color: #000;
+      }
+      >p {
+        font-size: 14px;
+        color: #828282;
+        line-height: 1.6;
+        margin-top: 10px;
+      }
+    }
+
+    .preview-box {
+      padding-left: 35px;
+      margin-top: 30px;
+      >h3 {
+        font-size: 14px;
+        color: #000;
+      }
+      .img-list {
+        display: flex;
+        margin-top: 32px;
+        padding: 0px 35px;
+        .img-box {
+          flex: 1;
+          margin-left: 53px;
+          &:first-child {
+            margin-left: 0px;
+          }
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 750px) {
+  .product-details {
+    table {
+      &.pc {
+        display: none;
+      }
+      &.h5 {
+        display: table;
+      }
+      td {
+        padding: 0px 10px;
+        .td-between {
+          > span {
+            font-size: 12px;
+          }
+          > div {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+
+    .desc-box {
+      .info-block {
+        padding-left: 0px;
+      }
+      .preview-box {
+        padding-left: 0px;
+        .img-list {
+          flex-direction: column;
+          margin-top: 10px;
+          .img-box {
+            margin-left: 0px;
+            margin-top: 20px;
+          }
+        }
+      }
+    }
   }
 }

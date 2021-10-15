@@ -2,7 +2,7 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './i18n.ts'
+// import './i18n.ts'
 import './index.css'
 import './style/global.less'
 import App from './App'

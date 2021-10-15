@@ -1,13 +1,13 @@
 /** @format */
 
 import React, {useRef} from 'react'
-import {useTranslation} from 'react-i18next'
+// import {useTranslation} from 'react-i18next'
 import {Select, Button} from 'antd'
 import useChart from '../../hooks/useChart'
 
 const {Option} = Select
 export default function Test() {
-  const {t, i18n} = useTranslation()
+  // const {t, i18n} = useTranslation()
 
   const chartRef = useRef(null)
   const options = {
@@ -33,14 +33,16 @@ export default function Test() {
   }
   useChart(chartRef, options)
 
-  function handleChange(value: string) {
-    console.log(`selected ${value}`)
-    i18n.changeLanguage(value)
-  }
+  // function handleChange(value: string) {
+  //   console.log(`selected ${value}`)
+  //   i18n.changeLanguage(value)
+  // }
   return (
     <div>
-      <p>content {t('test')}</p>
-      <Select defaultValue="lucy" style={{width: 120}} onChange={handleChange}>
+      {/* <p>content {t('test')}</p> */}
+      <p>content</p>
+      {/* <Select defaultValue="lucy" style={{width: 120}} onChange={handleChange}> */}
+      <Select defaultValue="lucy" style={{width: 120}}>
         <Option value="zh-CN">中文</Option>
         <Option value="en">English</Option>
       </Select>

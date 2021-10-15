@@ -8,8 +8,8 @@ type CountdownProps = {
   size?: string
   timeStamp?: number
 }
-// 默认时间戳11.1
-const Countdown = ({size, timeStamp = 1635696000000}: CountdownProps) => {
+// 默认时间戳2021/11/8 20:00
+const Countdown = ({size, timeStamp = 1636372800000}: CountdownProps) => {
   const intervalRef = useRef<any>(null)
   const now: any = Math.round(new Date().getTime())
   const end: any = timeStamp
@@ -64,7 +64,7 @@ const Countdown = ({size, timeStamp = 1635696000000}: CountdownProps) => {
 
   return (
     <div className={size ? `countdown-block ${size}` : 'countdown-block'}>
-      <div className="tiem-block">
+      <div className="time-block">
         <div className="num">
           <div></div>
           <div></div>
@@ -76,7 +76,7 @@ const Countdown = ({size, timeStamp = 1635696000000}: CountdownProps) => {
         <div></div>
         <p></p>
       </div>
-      <div className="tiem-block">
+      <div className="time-block">
         <div className="num">
           <div></div>
           <div></div>
@@ -88,7 +88,7 @@ const Countdown = ({size, timeStamp = 1635696000000}: CountdownProps) => {
         <div></div>
         <p></p>
       </div>
-      <div className="tiem-block">
+      <div className="time-block">
         <div className="num">
           <div></div>
           <div></div>
@@ -100,7 +100,7 @@ const Countdown = ({size, timeStamp = 1635696000000}: CountdownProps) => {
         <div></div>
         <p></p>
       </div>
-      <div className="tiem-block">
+      <div className="time-block">
         <div className="num">
           <div></div>
           <div></div>

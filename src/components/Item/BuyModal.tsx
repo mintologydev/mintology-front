@@ -1,42 +1,82 @@
 /** @format */
 
-import React from 'react'
-import {Modal} from 'antd'
+import React, {useState} from 'react'
+import {Button, Modal} from 'antd'
 import 'style/item/buy-modal.less'
 
 const defaultOnDismiss = () => null
 
-type TestModalProps = {
+type BuyModalProps = {
   onDismiss?: () => void
+  toBuy: (value: number) => Promise<void>
+  price: string
 }
 
-const TestModal = ({onDismiss = defaultOnDismiss}: TestModalProps) => {
+const BuyModal = ({price='', toBuy, onDismiss = defaultOnDismiss}: BuyModalProps) => {
+  const [value, setValue] = useState(0)
+  const [total, setTotal] = useState(0)
+  const onChange = event => {
+    setValue(event.target.value)
+    setTotal(Number(event.target.value) * 0.15)
+  }
+
+  const Increase = () => {
+    const n = Number(value) + 1
+    setValue(n)
+    setTotal(n * 0.15)
+  }
+
+  const Reduce = () => {
+    let n = Number(value) - 1
+    if (n < 0) {
+      n = 0
+    }
+    setValue(n)
+    setTotal(n * 0.15)
+  }
+
   return (
-    <Modal title="NFT name text" visible={true} onOk={onDismiss} onCancel={onDismiss}>
+    <Modal
+      title="NFT name text"
+      visible={true}
+      onOk={onDismiss}
+      onCancel={onDismiss}
+      closeIcon={
+        <svg className="modal-close-icon" aria-hidden="true">
+          <use xlinkHref="#icon-icon_close"></use>
+        </svg>
+      }
+      footer={[
+        <Button key="1" className="modal-one-btn" type="primary" onClick={() => toBuy(value)} disabled={value < 1}>
+          Confirm
+        </Button>,
+      ]}>
       <div className="buy-modal">
         <div className="info-box">
           <img />
           <div className="info">
             <h3>Price</h3>
             <div className="num">
-              <span className="big">0.15 ETH</span>
-              <span>0.15 ETH</span>
+              <span className="big">0.03 ETH</span>
+              {/* <span className="small">≈ $ 27.99</span> */}
             </div>
-            <p>The Remain Amount：100</p>
+            {/* <p>The Remain Amount：100</p> */}
           </div>
         </div>
         <div className="input-box">
-          <span>-</span>
-          <input type="text" placeholder="Amount" />
-          <span>+</span>
+          <button onClick={() => Reduce()} disabled={value === 0}>
+            -
+          </button>
+          <input type="number" placeholder="Amount" value={value} onChange={onChange} />
+          <button onClick={() => Increase()}>+</button>
         </div>
         <div className="total">
           <span>Total</span>
-          <span>0.2234 ETH</span>
+          <span>{total} ETH</span>
         </div>
       </div>
     </Modal>
   )
 }
 
-export default TestModal
+export default BuyModal

@@ -9,6 +9,8 @@ import {NetworkConnector} from './NetworkConnector'
 
 const NETWORK_URL = process.env.REACT_APP_NETWORK_URL
 
+// export const NETWORK_CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '97')
+// export const NETWORK_CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '4')
 export const NETWORK_CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1')
 
 if (typeof NETWORK_URL === 'undefined') {
@@ -26,19 +28,19 @@ export function getNetworkLibrary(): Web3Provider {
 }
 
 export const injected = new InjectedConnector({
-  // supportedChainIds: [1],
+  supportedChainIds: [1],
   // supportedChainIds: [4],
-  supportedChainIds: [97],
+  // supportedChainIds: [97],
 })
 
 // mainnet only
 export const walletconnect = new WalletConnectConnector({
-  // rpc: {[NETWORK_CHAIN_ID]: NETWORK_URL, '1': 'https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'},
-  // rpc: {[NETWORK_CHAIN_ID]: NETWORK_URL, '4': 'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'},
-  rpc: {[NETWORK_CHAIN_ID]: NETWORK_URL, '97': 'https://data-seed-prebsc-1-s1.binance.org:8545'},
+  rpc: {[NETWORK_CHAIN_ID]: NETWORK_URL, '1': 'https://mainnet.infura.io/v3/e076c591970f48869749c708c5b939e5'},
+  // rpc: {[NETWORK_CHAIN_ID]: NETWORK_URL, '4': 'https://rinkeby.infura.io/v3/0a857661bfc94df5b1c9ad928d74d660'},
+  // rpc: {[NETWORK_CHAIN_ID]: NETWORK_URL, '97': 'https://data-seed-prebsc-1-s1.binance.org:8545'},
   // bridge: 'https://bridge.walletconnect.org',
   // bridge: 'https://rinkeby.etherscan.io',
-  bridge: 'https://testnet.bscscan.com',
+  bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
   pollingInterval: 15000,
 })
