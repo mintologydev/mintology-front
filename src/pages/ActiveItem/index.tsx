@@ -17,6 +17,8 @@ import {checkWhiteList, registerWhiteList, buyOne} from 'utils/operate'
 import {BigNumber} from '@ethersproject/bignumber'
 import EventBanner from 'img/event_banner.png'
 import SuccessIcon from 'img/icon-success@2x.png'
+import HotIcon from 'img/hot@2x.png'
+import RightIcon from 'img/icon_right2@2x.png'
 import 'style/item/index.less'
 
 export default function ActiveItem() {
@@ -227,7 +229,14 @@ export default function ActiveItem() {
         </div>
       </div>
       <div className="product-detail-box">
-        <h3 className="title">Product Details</h3>
+        <h3 className="title">
+          <div>Product Details</div>
+          <a href="https://docs.google.com/forms/d/1TVJVUVjKz5O2wpYnpBhOiPczk3zVRQ4NGXuGDk4gSlI/edit" target="_blank">
+            <img src={HotIcon} className="hot-icon" />
+            <span>Get Whitelisted</span>
+            <img src={RightIcon} className="right-icon" />
+          </a>
+        </h3>
         <ProductDetails></ProductDetails>
       </div>
     </div>
