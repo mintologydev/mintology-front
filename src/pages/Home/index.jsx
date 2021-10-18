@@ -9,7 +9,10 @@ import 'style/home/index.less'
 export default function Home() {
   return (
     <div className="home-container">
-      <div className="banner"></div>
+      <a
+        href="https://docs.google.com/forms/d/1TVJVUVjKz5O2wpYnpBhOiPczk3zVRQ4NGXuGDk4gSlI/edit"
+        target="_blank"
+        className="banner"></a>
       <div className="body">
         <ActiveBlock></ActiveBlock>
         {/* <MysteryBoxesBlock></MysteryBoxesBlock> */}

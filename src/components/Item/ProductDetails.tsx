@@ -9,6 +9,7 @@ import 'style/item/product-details.less'
 // import DiscordImg from 'img/icon_discord.svg'
 import TwitterIcon from 'img/icon_twitter.svg'
 import InstagramIcon from 'img/logo-instagram.svg'
+import EtherscanIcon from 'img/etherscan.svg'
 
 export default function ProductDetails() {
   return (
@@ -19,7 +20,12 @@ export default function ProductDetails() {
             <td>
               <div className="td-between">
                 <span>Contract Address</span>
-                <div>To be launched soon</div>
+                <div>
+                  <a href="https://etherscan.io/address/0x2c5adc8ec23fda180ad1e52af3d9c19b4b21b82c" target="_blank">
+                    <span>0x2c5adc8ec23fda180ad1e52af3d9c19b4b21b82c</span>
+                    <img src={EtherscanIcon} />
+                  </a>
+                </div>
               </div>
             </td>
             <td>
@@ -83,7 +89,10 @@ export default function ProductDetails() {
             <td>
               <div className="td-between">
                 <span>Contract Address</span>
-                <div>0x495f….7v5e</div>
+                <a href="https://etherscan.io/address/0x2c5adc8ec23fda180ad1e52af3d9c19b4b21b82c" target="_blank">
+                  <span>0x2c5a...b82c</span>
+                  <img src={EtherscanIcon} />
+                </a>
               </div>
             </td>
           </tr>
