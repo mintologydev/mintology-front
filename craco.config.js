@@ -23,7 +23,7 @@ module.exports = {
           // btn
           '@component-background': '#fff',
           '@border-color-base': '#000000',
-          '@btn-default-borde': '#00B7AF',
+          '@btn-default-borde': '#000000',
           '@background-color-base': '#fff',
           '@body-background': '#F5F7FB',
           '@input-back': 'rgba(255, 255, 255, 0.8)',

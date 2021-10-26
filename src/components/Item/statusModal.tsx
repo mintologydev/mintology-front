@@ -1,6 +1,6 @@
 /** @format */
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import {Button, Modal} from 'antd'
 import IconSuccess from 'img/icon_success@2x.png'
 import IconFail from 'img/icon_fail@2x.png'
@@ -12,6 +12,7 @@ type StatusModalProps = {
   gotoMynft?: () => void
   status?: string // success, error
   hash?: any
+  statusData?: any
   onDismiss?: () => void
 }
 
@@ -19,6 +20,7 @@ const StatusModal = ({
   gotoMynft = defaultOnDismiss,
   status = 'success',
   hash = 'xxx',
+  statusData = {},
   onDismiss = defaultOnDismiss,
 }: StatusModalProps) => {
 
@@ -26,6 +28,12 @@ const StatusModal = ({
     gotoMynft()
     onDismiss()
   }
+
+  useEffect(() => {
+    console.log('statusModal####status####', status)
+    console.log('statusModal####hash####', hash)
+    console.log('statusModal####statusData####', statusData)
+  }, [status, hash, statusData])
 
   return (
     <Modal
@@ -40,14 +48,16 @@ const StatusModal = ({
       }
       footer={[
         <Button key="1" className="modal-one-btn status-modal-btn" type="primary" onClick={() => toMynfts()}>
-          View My NFTs
+          View My NFTs {statusData.status}
         </Button>,
       ]}>
       <div className="status-modal">
-        <div className="img-box">{status === 'success' ? <img src={IconSuccess} /> : <img src={IconFail} />}</div>
+        <div className="img-box">
+          {statusData.status === 'success' ? <img src={IconSuccess} /> : <img src={IconFail} />}
+        </div>
         <h3>{status === 'success' ? 'Transaction Submitted' : 'Transaction Rejected'}</h3>
-        {status === 'success' && hash ? (
-          <a href={`https://rinkeby.etherscan.io/tx/${hash}`} target="_blank">
+        {statusData.status === 'success' && statusData.hash ? (
+          <a href={`https://rinkeby.etherscan.io/tx/${statusData.hash}`} target="_blank">
             <span>View on Explorer</span>
             <svg className="icon" aria-hidden="true">
               <use xlinkHref="#icon-icon_arrow-right-up"></use>

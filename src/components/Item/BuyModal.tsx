@@ -17,13 +17,13 @@ const BuyModal = ({price='', toBuy, onDismiss = defaultOnDismiss}: BuyModalProps
   const [total, setTotal] = useState(0)
   const onChange = event => {
     setValue(event.target.value)
-    setTotal(Number(event.target.value) * 0.15)
+    setTotal(Number(event.target.value) * 0.03)
   }
 
   const Increase = () => {
     const n = Number(value) + 1
     setValue(n)
-    setTotal(n * 0.15)
+    setTotal(n * 0.03)
   }
 
   const Reduce = () => {
@@ -32,8 +32,10 @@ const BuyModal = ({price='', toBuy, onDismiss = defaultOnDismiss}: BuyModalProps
       n = 0
     }
     setValue(n)
-    setTotal(n * 0.15)
+    setTotal(n * 0.03)
   }
+
+  const [cansubmit, setCansubmit] = useState(false)
 
   return (
     <Modal
@@ -47,7 +49,15 @@ const BuyModal = ({price='', toBuy, onDismiss = defaultOnDismiss}: BuyModalProps
         </svg>
       }
       footer={[
-        <Button key="1" className="modal-one-btn" type="primary" onClick={() => toBuy(value)} disabled={value < 1}>
+        <Button
+          key="1"
+          className="modal-one-btn"
+          type="primary"
+          onClick={() => {
+            setCansubmit(true)
+            toBuy(value)
+          }}
+          disabled={value < 1 || cansubmit}>
           Confirm
         </Button>,
       ]}>

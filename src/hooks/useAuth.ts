@@ -22,15 +22,15 @@ const useAuth = () => {
   const login = useCallback(
     (connectorID: ConnectorNames) => {
       window.localStorage.setItem('currentPlatform', connectorID)
-      // console.log('connectorID####', connectorID)
+      console.log('connectorID####', connectorID)
       const connector = connectorsByName[connectorID]
-      // console.log('connectorconnectorconnector####', connector)
+      console.log('connectorconnectorconnector####', connector)
       if (connector) {
         activate(connector, async (error: Error) => {
           if (error instanceof UnsupportedChainIdError) {
-            // console.log('没进来么')
+            console.log('没进来么')
             const hasSetup = await setupNetwork()
-            // console.log('hasSetup####', hasSetup)
+            console.log('hasSetup####', hasSetup)
             if (hasSetup) {
               activate(connector)
             }

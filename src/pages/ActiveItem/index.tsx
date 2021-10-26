@@ -23,112 +23,154 @@ import 'style/item/index.less'
 
 export default function ActiveItem() {
   const {account} = useWeb3React()
-  // const contract = useDistribution()
+  const contract = useDistribution()
 
-  // const nftContract = useNFTContract()
+  const nftContract = useNFTContract()
 
   const [isChecked, setIsChecked] = useState(false)
   const {login, logout} = useAuth()
   const {onPresentConnectModal, onPresentAccountModal} = useWalletModal(login, logout, account || undefined)
 
-  // async function toCheckWhiteList() {
-  //   if (contract && account) {
-  //     // const isChecked = await checkWhiteList(contract, account)
-  //     const isChecked = await checkWhiteList(nftContract, account)
-  //     setIsChecked(isChecked)
-  //   }
-  // }
-  // let timer:any
-  // async function toRegisterWhiteList() {
-  //   await registerWhiteList(contract)
-  //   timer = setInterval(() => {
-  //     if (!isChecked && account && contract) {
-  //       toCheckWhiteList()
-  //     } else {
-  //       clearInterval(timer)
-  //     }
-  //   }, 1000)
-  // }
+  async function toCheckWhiteList() {
+    if (contract && account) {
+      // const isChecked = await checkWhiteList(contract, account)
+      const isChecked = await checkWhiteList(nftContract, account)
+      setIsChecked(isChecked)
+    }
+  }
+  let timer:any
+  async function toRegisterWhiteList() {
+    await registerWhiteList(contract)
+    timer = setInterval(() => {
+      if (!isChecked && account && contract) {
+        toCheckWhiteList()
+      } else {
+        clearInterval(timer)
+      }
+    }, 1000)
+  }
 
-  // useEffect(() => {
-  //   if (account && contract) {
-  //     toCheckWhiteList()
-  //   }
-  // }, [account, contract])
+  useEffect(() => {
+    if (account && contract) {
+      toCheckWhiteList()
+    }
+  }, [account, contract])
 
   // 账户里nft数量大于4则进制购买
   const [nftBalance, setNftBalance] = useState(0)
-  // async function getNFTBalance() {
-  //   const balance = formatUnits(await nftContract.balanceOf(account), '0')
-  //   setNftBalance(Number(balance))
-  // }
+  async function getNFTBalance() {
+    const balance = formatUnits(await nftContract.balanceOf(account), '0')
+    setNftBalance(Number(balance))
+  }
 
   const [price, setPrice] = useState('')
 
-  // async function getNFTPrice() {
-  //   const p = await nftContract.publicPrice()
-  //   setPrice(p)
-  // }
+  async function getNFTPrice() {
+    const p = await nftContract.publicPrice()
+    setPrice(p)
+  }
 
-  // useEffect(() => {
-  //   if (nftContract && account) {
-  //     // getNFTBalance()
-  //     // getNFTPrice()
-  //   }
-  // }, [account, nftContract])
+  useEffect(() => {
+    if (nftContract && account) {
+      getNFTBalance()
+      getNFTPrice()
+    }
+  }, [account, nftContract])
 
-  // function calculateGasMargin(value: BigNumber): BigNumber {
-  //   return value.mul(BigNumber.from(10000).add(BigNumber.from(1000))).div(BigNumber.from(10000))
-  // }
+  function calculateGasMargin(value: BigNumber): BigNumber {
+    return value.mul(BigNumber.from(10000).add(BigNumber.from(1000))).div(BigNumber.from(10000))
+  }
 
-  // const [status, setStatus] = useState('')
-  // const [hash, setHash] = useState('')
 
-  // const toBuy = async (value: number) => {
-  //   try {
-  //     const methodNames = ['mint']
-  //     // const price = formatUnits(await nftContract.publicPrice(), 18)
-  //     const price = await nftContract.publicPrice()
-  //     console.log('price#####', price)
-  //     const amount = BigNumber.from(value).mul(BigNumber.from(String(price)))
-  //     console.log('amount#####', amount.toString())
-  //     const options = {
-  //       from: account,
-  //       value: amount.toString(),
-  //     }
-  //     const safeGasEstimates: (BigNumber | undefined)[] = await Promise.all(
-  //       methodNames.map((methodName, index) =>
-  //         nftContract.estimateGas[methodName](value, options)
-  //           .then(calculateGasMargin)
-  //           .catch(e => {
-  //             console.error('estimateGas failed', index, e)
-  //             return undefined
-  //           }),
-  //       ),
-  //     )
+  const [currentStatus, setCurrentStatus] = useState('success')
+  const [hash, setHash] = useState('')
+  const [statusData, setStatusData] = useState({status: 'success', hash: ''})
+  const [showStatusModal, setShowStatusModl] = useState(false)
+  const [cansubmit, setCansubmit] = useState(false)
+  function toCloseStatusModal() {
+    setCurrentStatus('')
+    setHash('')
+    setStatusData({
+      status: '',
+      hash: '',
+    })
+    closeStatusModal()
+  }
+  const [openStatusModal, closeStatusModal] = useModal(
+    <StatusModal
+      status={currentStatus}
+      hash={hash}
+      statusData={statusData}
+      gotoMynft={gotoMynft}
+      onDismiss={() => toCloseStatusModal()}></StatusModal>,
+  )
 
-  //     if (safeGasEstimates[0]) console.log('safeGasEstimates####', safeGasEstimates[0].toString())
+  const toBuy = async (value: number) => {
+    let tx: any
+    try {
+      const methodNames = ['mint']
+      // const price = formatUnits(await nftContract.publicPrice(), 18)
+      const price = await nftContract.publicPrice()
+      console.log('price#####', price)
+      const amount = BigNumber.from(value).mul(BigNumber.from(String(price)))
+      console.log('amount#####', amount.toString())
+      const options = {
+        from: account,
+        value: amount.toString(),
+      }
+      const safeGasEstimates: (BigNumber | undefined)[] = await Promise.all(
+        methodNames.map((methodName, index) =>
+          nftContract.estimateGas[methodName](value, options)
+            .then(calculateGasMargin)
+            .catch(e => {
+              console.error('estimateGas failed', index, e)
+              return undefined
+            }),
+        ),
+      )
 
-  //     const gasLimit = safeGasEstimates[0] ? safeGasEstimates[0].toString() : 210000
+      if (safeGasEstimates[0]) console.log('safeGasEstimates####', safeGasEstimates[0].toString())
 
-  //     const tx = await nftContract.mint(value, {...options, gasLimit})
-  //     console.log('tx#####', tx)
-  //     setStatus('success')
-  //     setHash(tx.hash)
-  //     setTimeout(() => openStatusModal(), 500)
+      const gasLimit = safeGasEstimates[0] ? safeGasEstimates[0].toString() : 210000
 
-  //     const receipt = await tx.wait()
-  //     console.log('receipt#####', receipt)
-  //     console.log('receipt.status#####', receipt.status)
-  //   } catch (e) {
-  //     console.log('e#####', e)
-  //     setStatus('error')
-  //     setHash('')
-  //     setTimeout(() => openStatusModal(), 500)
-  //   }
+      tx = await nftContract.mint(value, {...options, gasLimit})
+      console.log('tx#####', tx)
+      setCurrentStatus('success')
+      setHash(tx.hash)
+      setStatusData({
+        status: 'success',
+        hash: tx.hash
+      })
+      // openStatusModal()
+      closeBuyModal()
+      setShowStatusModl(true)
+      setCansubmit(false)
+      // setTimeout(() => openStatusModal(), 1500)
 
-  //   // // onDismiss()
-  // }
+      const receipt = await tx.wait()
+      console.log('receipt#####', receipt)
+      console.log('receipt.status#####', receipt.status)
+    } catch (e) {
+      console.log('为啥进到这里了###')
+      console.log('hehehe#####', e)
+      console.log('catch@@@e####tx####', tx)
+      if (!tx) {
+        setCurrentStatus('error')
+        setHash('')
+        setStatusData({
+          status: 'error',
+          hash: '',
+        })
+        // openStatusModal()
+        closeBuyModal()
+        setShowStatusModl(true)
+        setCansubmit(false)
+        // setTimeout(() => openStatusModal(), 1500)
+      }
+    }
+
+    // // onDismiss()
+  }
 
   const history = useHistory()
   function gotoMynft() {
@@ -136,9 +178,14 @@ export default function ActiveItem() {
     history.push('/mynfts')
   }
 
-  // const [openBuyModal] = useModal(<BuyModal toBuy={toBuy} price={price}></BuyModal>)
-  // const [openStatusModal] = useModal(<StatusModal status={status} hash={hash} gotoMynft={gotoMynft}></StatusModal>)
+  useEffect(() => {
+    console.log('index.tsx###currentStatus####', currentStatus)
+    console.log('index.tsx####hash#####', hash)
+  }, [currentStatus, hash])
 
+  const [openBuyModal, closeBuyModal] = useModal(
+    <BuyModal toBuy={toBuy} price={price}></BuyModal>,
+  )
 
 
 
@@ -146,6 +193,10 @@ export default function ActiveItem() {
     <div className="item-container">
       <div className="top-box">
         <div className="img-box">
+          <div className="title">
+            <h3>CheekyCorgi NFT Collection Presale</h3>
+            <div className="label">Presale</div>
+          </div>
           <img src={EventBanner} />
         </div>
         <div className="info-box">
@@ -189,13 +240,13 @@ export default function ActiveItem() {
           </div>
 
           {!isChecked ? <div className="qualified"></div> : null}
-          {isChecked && nftBalance <= 4 ? (
+          {isChecked && nftBalance <= 100 ? (
             <div className="qualified">
               <img src={SuccessIcon} />
               <span>Your are eligible to participate</span>
             </div>
           ) : null}
-          {isChecked && nftBalance > 4 ? <div className="qualified"></div> : null}
+          {isChecked && nftBalance > 100 ? <div className="qualified"></div> : null}
 
           {!account ? <Button onClick={() => onPresentConnectModal()}>Connect Wallet</Button> : null}
           {account && !isChecked ? (
@@ -204,15 +255,23 @@ export default function ActiveItem() {
             </Button>
           ) : null}
 
-          {account && isChecked && nftBalance < 4 ? (
+          {account && isChecked && nftBalance <= 100 ? (
             // <Button type="primary" disabled>
-            // <Button type="primary" onClick={() => openBuyModal()}>
-            <Button type="primary" disabled={new Date().getTime() < 1636372800000}>
+            <Button
+              type="primary"
+              disabled={cansubmit}
+              onClick={() => {
+                openBuyModal()
+                setCansubmit(true)
+            }}>
               Buy Now
             </Button>
-          ) : null}
+          ) : // <Button type="primary" disabled={new Date().getTime() < 1636372800000}>
+          //   Buy Now
+          // </Button>
+          null}
 
-          {account && isChecked && nftBalance > 4 ? (
+          {account && isChecked && nftBalance > 100 ? (
             <Tooltip placement="bottom" title="You have reached the max purchase limit">
               <Button type="primary" disabled>
                 Buy Now
@@ -239,6 +298,15 @@ export default function ActiveItem() {
         </h3>
         <ProductDetails></ProductDetails>
       </div>
+
+      {showStatusModal ? (
+        <StatusModal
+          status={currentStatus}
+          hash={hash}
+          statusData={statusData}
+          gotoMynft={gotoMynft}
+          onDismiss={() => setShowStatusModl(false)}></StatusModal>
+      ) : null}
     </div>
   )
 }

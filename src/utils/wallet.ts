@@ -9,10 +9,13 @@
  * Prompt the user to add BSC as a network on Metamask, or switch to BSC if the wallet is on a different network
  * @returns {boolean} true if the setup succeeded, false otherwise
  */
+import {ChainId} from '../constants'
+
 export const setupNetwork = async () => {
   const provider = window.ethereum
+  console.log('setupNetwork####ChainId.MAINNET####', ChainId.MAINNET)
   if (provider) {
-    const chainId = parseInt('1', 10)
+    const chainId = parseInt(String(ChainId.MAINNET), 10)
     // const chainId = parseInt('97', 10)
     // const chainId = parseInt('4', 10)
 
@@ -81,27 +84,55 @@ export const setupNetwork = async () => {
         method: 'wallet_switchEthereumChain',
         params: [
           {
-            chainId: '0x1',
+            chainId: `0x${chainId.toString(16)}`,
           },
         ],
       })
       return true
     } catch (error) {
       try {
+        let currentParamsItem: any
+        if (chainId === 1) {
+          currentParamsItem = {
+            chainId: `0x${chainId.toString(16)}`,
+            chainName: 'Ethereum Mainnet',
+            nativeCurrency: {
+              name: 'ETH',
+              symbol: 'eth',
+              decimals: 18,
+            },
+            rpcUrls: ['https://mainnet.infura.io/v3/e076c591970f48869749c708c5b939e5'],
+            blockExplorerUrls: ['https://etherscan.io'],
+          }
+        } else {
+          currentParamsItem = {
+            chainId: `0x${chainId.toString(16)}`,
+            chainName: 'Rinkeby Test Network',
+            nativeCurrency: {
+              name: 'ETH',
+              symbol: 'eth',
+              decimals: 18,
+            },
+            rpcUrls: ['https://rinkeby.infura.io/v3/e076c591970f48869749c708c5b939e5'],
+            // rpcUrls: ['https://rinkeby.infura.io'],
+            blockExplorerUrls: ['https://rinkeby.etherscan.io'],
+          }
+        }
         await provider.request({
           method: 'wallet_addEthereumChain',
           params: [
-            {
-              chainId: `0x${chainId.toString(16)}`,
-              chainName: 'Ethereum Mainnet',
-              nativeCurrency: {
-                name: 'ETH',
-                symbol: 'eth',
-                decimals: 18,
-              },
-              rpcUrls: ['https://mainnet.infura.io/v3/e076c591970f48869749c708c5b939e5'],
-              blockExplorerUrls: ['https://etherscan.io'],
-            },
+            currentParamsItem,
+            // {
+            //   chainId: `0x${chainId.toString(16)}`,
+            //   chainName: 'Ethereum Mainnet',
+            //   nativeCurrency: {
+            //     name: 'ETH',
+            //     symbol: 'eth',
+            //     decimals: 18,
+            //   },
+            //   rpcUrls: ['https://mainnet.infura.io/v3/e076c591970f48869749c708c5b939e5'],
+            //   blockExplorerUrls: ['https://etherscan.io'],
+            // },
             // {
             //   chainId: `0x${chainId.toString(16)}`,
             //   chainName: 'Rinkeby Test Network',

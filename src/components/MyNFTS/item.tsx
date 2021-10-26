@@ -1,42 +1,38 @@
 /** @format */
 
 import React, {useState, useEffect} from 'react'
+import {Spin} from 'antd'
 
 type MyNftsProps = {
-  name: number
+  info: any,
+  isLoading: boolean
 }
 
 const MyNfts = (props: MyNftsProps) => {
-  const {name} = props
-
+  const {info, isLoading} = props
   const [showAddress, setShowAddress] = useState(false)
 
   return (
     <div className={showAddress ? 'item height-auto' : 'item'}>
+      {isLoading ? <Spin /> : null}
       <div className="img-box">
-        <img />
-      </div>
-      <div className="introduce">
-        <h3>NFT name {name}</h3>
-        <p>介绍缩略文本介绍缩略文本介绍缩略文本介绍缩略文本介绍缩略文本介绍缩略文本</p>
+        <img src={info.image} />
       </div>
       <div className="info-box">
-        <div className="price-box" onClick={() => setShowAddress(!showAddress)}>
-          <div className="left">0.1235ETH</div>
-          <div className="right">
-            <span>#01/100</span>
-            <div className="toggle-btn">
-              <svg className="icon" aria-hidden="true">
-                <use xlinkHref="#icon-icon_return"></use>
-              </svg>
-            </div>
-          </div>
+        <div className="name-box" onClick={() => setShowAddress(!showAddress)}>
+          <h3>
+            <span>{info.name}</span>
+            {info.name ? <svg className="icon" aria-hidden="true">
+              <use xlinkHref="#icon-icon-down"></use>
+            </svg> : null}
+          </h3>
+          <p>{info.id}</p>
         </div>
         {showAddress ? (
           <div className="address">
             <h3>Contract Address</h3>
-            <a>
-              <span>02345s......dert62345</span>
+            <a href="https://rinkeby.etherscan.io/address/0xcb0eccd1d9c9250855175d849f3efe122c12c0bd" target="_blank">
+              <span>0xcb0e......12c0bd</span>
               <svg className="icon" aria-hidden="true">
                 <use xlinkHref="#icon-icon_arrow-right-up"></use>
               </svg>

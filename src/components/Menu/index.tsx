@@ -1,6 +1,7 @@
 /** @format */
 
 import React, {useEffect, useState} from 'react'
+import {useHistory} from 'react-router-dom'
 import {Button} from 'antd'
 import {useWeb3React} from '@web3-react/core'
 // import {useDispatch} from 'react-redux'
@@ -68,15 +69,21 @@ const Menu: React.FC = props => {
 
   const [showMenu, setShowMenu] = useState(false)
 
+  const history = useHistory()
+
+  function gotoMynfts() {
+    history.push('/mynfts')
+  }
+
   return (
-    <div className="container">
+    <div className="menu-container">
       <nav>
         <a className="logo" href="https://www.mintology.studio/" target="_blank">
           <img src={Logo} />
         </a>
         <div className="right pc">
           <a href="/">HOME</a>
-          <a>My NFTs</a>
+          <a onClick={() => gotoMynfts()}>My NFTs</a>
 
           {!account ? (
             <Button type="primary" onClick={() => onPresentConnectModal()}>

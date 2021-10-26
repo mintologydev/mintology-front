@@ -1,13 +1,16 @@
 /** @format */
-.active-block {
+.active-block-item {
   width: 1160px;
   margin: 0 auto;
   display: flex;
   margin-top: 90px;
   > .left {
     width: 520px;
-    height: 590px;
+    height: 520px;
     overflow: hidden;
+    h3 {
+      display: none;
+    }
     img {
       width: 100%;
     }
@@ -16,16 +19,21 @@
     width: 620px;
     margin-left: 20px;
     > h3 {
-      height: 150px;
+      height: 100px;
       font-size: 42px;
       line-height: 50px;
+      margin-bottom: 20px;
     }
-    .start-countdown-box,.coming-soon {
+    .start-countdown-box,
+    .coming-soon {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       margin-top: 16px;
       width: 620px;
-      height: 422px;
+      height: 400px;
       // background: linear-gradient(180deg, rgba(162, 255, 244, 0.14) 0%, rgba(235, 56, 210, 0) 100%);
-      background: linear-gradient(180deg, #EDDEFB 0%, rgba(237, 222, 251, 0) 100%);
+      background: linear-gradient(180deg, #bec5d5 0%, rgba(237, 222, 251, 0) 100%);
       padding: 0px 56px;
       padding-top: 50px;
       > .title {
@@ -36,7 +44,7 @@
         span {
           font-size: 26px;
         }
-        >div {
+        > div {
           display: flex;
           align-items: center;
           img {
@@ -48,7 +56,7 @@
       button {
         width: 100%;
         height: 80px;
-        margin-top: 59px;
+        margin-top: 50px;
         span {
           font-size: 36px;
         }
@@ -58,10 +66,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 50px!important;
+      padding-top: 50px !important;
       img {
-        width: 120px;
-        height: 120px;
+        width: 140px;
+        height: 140px;
       }
       p {
         font-size: 26px;
@@ -69,42 +77,63 @@
       }
     }
   }
+  &:nth-child(2) {
+    .right {
+      .start-countdown-box,
+      .coming-soon {
+        background: linear-gradient(180deg, #8beeff 0%, rgba(237, 222, 251, 0) 100%);
+      }
+      button {
+        margin-top: 90px;
+      }
+    }
+  }
 }
-
 
 @media (max-width: 1600px) {
   .active-block {
     width: 952px;
+    margin: 0 auto;
     // min-width: 1000px;
     .left {
       width: 408px;
-      height: 463px;
+      height: 430px;
+      h3 {
+        display: none;
+      }
     }
     .right {
       width: 514px;
       margin-left: 30px;
-      >h3 {
+      > h3 {
         height: 100px;
         font-size: 36px;
+        margin-bottom: 20px;
       }
-      .start-countdown-box, .coming-soon {
+
+      .start-countdown-box,
+      .coming-soon {
         width: 514px;
-        height: 350px;
+        height: 288px;
         padding: 0px 39px;
         padding-top: 24px;
+        img {
+          width: 100px;
+          height: 100px;
+        }
         .countdown-block {
           .time-block {
             .num {
               div {
-                width: 89px;
-                height: 53px;
+                width: 80px;
+                height: 42px;
               }
               span {
-                font-size: 52px;
+                font-size: 46px;
               }
             }
             p {
-              font-size: 24px;
+              font-size: 22px;
               padding-top: 10px;
             }
           }
@@ -124,7 +153,7 @@
             }
           }
         }
-        >.title {
+        > .title {
           padding-bottom: 13px;
           span {
             font-size: 24px;
@@ -132,41 +161,60 @@
         }
         button {
           height: 64px;
-          margin-top: 40px;
+          margin-top: 20px;
           span {
             font-size: 24px;
           }
         }
       }
+      .coming-soon {
+        button {
+          margin-top: 40px;
+        }
+      }
     }
   }
-
 }
-
 
 @media (max-width: 750px) {
   .active-block {
     width: 100%;
+  }
+  .active-block-item {
+    width: 100%;
     flex-direction: column;
     margin-top: 40px;
-    >.left {
+    &:nth-child(2) {
+      .left {
+        margin-top: 20px;
+      }
+    }
+    .left {
       width: 100%;
       height: auto;
+      > h3 {
+        display: block;
+        height: auto;
+        font-size: 22px;
+        line-height: 1.5;
+        margin-top: 14px;
+      }
+      img {
+        width: 100%;
+      }
     }
     .right {
       width: 100%;
       margin-left: 0px;
-      >h3 {
-        height: auto;
-        font-size: 24px;
-        line-height: 1.5;
-        margin-top: 14px;
+      > h3 {
+        display: none;
       }
-      .start-countdown-box,.coming-soon {
+      .start-countdown-box,
+      .coming-soon {
         width: 100%;
         padding: 0px 10px;
         padding-top: 14px;
-        >.title {
+        > .title {
           span {
             font-size: 16px;
           }
@@ -213,7 +261,6 @@
           margin-top: 24px;
         }
       }
-
     }
   }
 }

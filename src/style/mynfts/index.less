@@ -18,71 +18,60 @@
   }
   .list {
     display: flex;
+    flex-wrap: wrap;
+    // justify-content: space-between;
     .item {
       width: 254px;
-      height: 480px;
+      height: 384px;
+      margin: 10px 0px;
       margin-left: 28px;
       border: 1px solid #000000;
+      position: relative;
+      .ant-spin-spinning {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
       &.height-auto {
         height: auto;
       }
-      &:first-child {
+      &:nth-of-type(4n + 1) {
         margin-left: 0px;
       }
       .img-box {
         width: 100%;
-        height: 300px;
+        height: 305px;
         overflow: hidden;
-      }
-      .introduce {
-        padding: 0px 12px;
-        padding-top: 20px;
-        h3 {
-          font-size: 20px;
-        }
-        p {
-          font-size: 14px;
-          color: #828282;
-          line-height: 24px;
-          height: 70px;
+        img {
+          width: 100%;
         }
       }
       .info-box {
         padding: 0px 12px;
         margin-top: 14px;
-        .price-box {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding-bottom: 20px;
-          .left {
-            width: 80px;
-            height: 24px;
-            background: rgba(#45dac8, 0.17);
-            font-size: 14px;
-            color: #000;
-            line-height: 24px;
-            text-align: center;
-          }
-          .right {
+        .name-box {
+          padding-bottom: 15px;
+          h3 {
             display: flex;
             align-items: center;
-            font-size: 14px;
-            color: #000;
-            .toggle-btn {
-              width: 16px;
-              height: 16px;
-              background: #000;
-              border-radius: 100%;
-              margin-left: 6px;
-              cursor: pointer;
-              .icon {
-                width: 16px;
-                height: 16px;
-                fill: #fff;
-              }
+            justify-content: space-between;
+            margin-bottom: 0px;
+            span {
+              font-size: 20px;
+              color: #000;
             }
+            .icon {
+              width: 20px;
+              height: 20px;
+              fill: #000;
+              cursor: pointer;
+            }
+          }
+          p {
+            font-size: 14px;
+            color: #787878;
+            padding-top: 8px;
           }
         }
         .address {
@@ -108,6 +97,24 @@
           }
         }
       }
+    }
+  }
+  .no-data {
+    height: 236px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .img-block {
+      img {
+        width: 80px;
+        height: 80px;
+      }
+    }
+    p {
+      font-size: 16px;
+      color: #000;
     }
   }
 }
