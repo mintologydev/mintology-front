@@ -220,7 +220,7 @@ export default function ActiveItem() {
             <li>
               <div>Sale Period</div>
               {/* <p>09/01 19:00 - 10/01 19:00</p> */}
-              <p>20:00PM, Nov 8, 2021. (GMT+8) - TBD</p>
+              <p>20:00PM, Nov 27, 2021. (GMT+8) - TBD</p>
             </li>
           </ul>
           <div className="countdown-box">
@@ -263,7 +263,7 @@ export default function ActiveItem() {
               onClick={() => {
                 openBuyModal()
                 setCansubmit(true)
-            }}>
+              }}>
               Buy Now
             </Button>
           ) : // <Button type="primary" disabled={new Date().getTime() < 1636372800000}>

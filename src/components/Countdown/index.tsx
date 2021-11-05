@@ -8,8 +8,8 @@ type CountdownProps = {
   size?: string
   timeStamp?: number
 }
-// 默认时间戳2021/11/8 20:00
-const Countdown = ({size, timeStamp = 1636372800000}: CountdownProps) => {
+// 默认时间戳2021/11/27 20:00
+const Countdown = ({size, timeStamp = 1638014400000}: CountdownProps) => {
   const intervalRef = useRef<any>(null)
   const now: any = Math.round(new Date().getTime())
   const end: any = timeStamp
